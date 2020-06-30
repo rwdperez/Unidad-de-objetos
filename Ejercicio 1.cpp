@@ -11,13 +11,15 @@ class jugador {
 public:
 	
 	jugador(string nombreJugador);
-	mostrar();
+	void  mostrar();
+	void setNombre(string cambiarNombre);
 
 };
 	
-	jugador::mostrar(){
+	void jugador::mostrar(){
 		
-		cout<<jugador::nombre;
+		cout<<"Mi nombre es "<<nombre;
+		
 		
 	}
 
@@ -26,12 +28,22 @@ public:
 	jugador::nombre = nombreJugador;
 	
 }
+	void jugador::setNombre(string cambiarNombre){
+		
+		jugador::nombre = cambiarNombre;
+	}
 
 int main(int argc, char *argv[]) {
 	
 
 
-	jugador jug1("hola");
+	jugador jug1("walter");
+	
+	jug1.mostrar();
+	
+	jug1.setNombre("tito waltito ");
+	
+	jug1.mostrar();
 	
 	
 
