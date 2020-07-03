@@ -6,10 +6,29 @@
 
 Ficha::Ficha() {}
 
-Ficha::Ficha(char c) {}
+Ficha::Ficha(char c) {
+	
+	figura = c;
+}
 
-void Ficha::setFigura(char c) {}
+void Ficha::setFigura(char c) {
+	
+	figura = c;
+}
 
-char Ficha::getFigura() {}
+char Ficha::getFigura() {
+	
+	return figura;
+}
 
-bool Ficha::compare(Ficha f) {}
+bool Ficha::compare(Ficha f) {
+	
+	if ( f.figura == figura){
+		
+		return true;
+	}
+	else{
+		
+		return false;
+	}
+}
