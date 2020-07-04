@@ -9,7 +9,7 @@ class Juego {
 	private:
 		
 		int mapa[3][3];
-		char letra;
+		
 		
 		
 	
@@ -27,8 +27,8 @@ class Juego {
 Juego::Juego(){}
 
 void Juego::SetMapa(int x, int y, char c){
-	letra = letra;
-	mapa[x][y] = letra;
+	
+	mapa[x][y] = c;
 	
 
 }
