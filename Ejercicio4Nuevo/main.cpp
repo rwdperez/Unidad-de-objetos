@@ -21,14 +21,13 @@ class Ficha {
 		
 		char getFigura();
 		
-		bool compare(Ficha f);
 };
 class Juego {
 	
 private:
 	
 	Ficha mapa[3][3];
-	
+	bool gano = false;
 	
 	
 	
@@ -44,6 +43,8 @@ public:
 	void mostrar();
 	
 	void lugarDisponible();
+	
+	void ganador();
 	
 	void verMapa();
 	
@@ -72,17 +73,7 @@ char Ficha::getFigura() {
 	return figura;
 }
 
-bool Ficha::compare(Ficha f) {
-	
-	if ( f.figura == figura){
-		
-		return true;
-	}
-	else{
-		
-		return false;
-	}
-}
+
 
 Juego::Juego(){}
 
@@ -127,14 +118,14 @@ void Juego::mostrar(){
 		}
 		cout<<endl;
 	}
-
+cout<<endl;
 }
 
 void Juego::lugarDisponible(){
 	
+	ganador();
 
 		if (mapa[0][0].getFigura() == '0'){
-			
 			cout<<"Coordenadas A1 Presione 1 "<<endl;
 		}
 		if (mapa[0][1].getFigura() == '0'){
@@ -161,13 +152,56 @@ void Juego::lugarDisponible(){
 		if (mapa[2][2].getFigura() == '0'){
 			cout<<"Coordenadas C3 Presione 9 "<<endl;
 		}
-	cout<<endl;
+	cout<<"PARA SALIR PRESIONE ESCAPE"<<endl<<endl;
 
 	
 	
 
 }
+void Juego::ganador(){
+	for (int i = 0; i < 3; i++){
+		
+		if(mapa[0][i].getFigura() == 'X' && mapa[1][i].getFigura() == 'X' && mapa[2][i].getFigura() == 'X'){
+			cout<<" JUGADOR 1 GANA"<<endl;
+			gano = true;
+		}
+		if(mapa[i][0].getFigura() == 'X' && mapa[i][1].getFigura() == 'X' && mapa[i][2].getFigura() == 'X'){
+			cout<<" JUGADOR 1 GANA"<<endl;
+			gano = true;
+		}
+
+		
+		if(mapa[0][i].getFigura() == 'O' && mapa[1][i].getFigura() == 'O' && mapa[2][i].getFigura() == 'O'){
+			cout<<" JUGADOR 2 GANA"<<endl;
+			gano = true;
+		}
+		if(mapa[i][0].getFigura() == 'O' && mapa[i][1].getFigura() == 'O' && mapa[i][2].getFigura() == 'O'){
+			cout<<" JUGADOR 2 GANA"<<endl;
+			gano = true;
+		}
+		
+	}
+	if(mapa[0][0].getFigura() == 'O' && mapa[1][1].getFigura() == 'O' && mapa[2][2].getFigura() == 'O'){
+		cout<<" JUGADOR 2 GANA"<<endl;
+		gano = true;
+	}
+	if(mapa[0][2].getFigura() == 'O' && mapa[1][1].getFigura() == 'O' && mapa[2][0].getFigura() == 'O'){
+		cout<<" JUGADOR 2 GANA"<<endl;
+		gano = true;
+	}
+	if(mapa[0][0].getFigura() == 'X' && mapa[1][1].getFigura() == 'X' && mapa[2][2].getFigura() == 'X'){
+		cout<<" JUGADOR 1 GANA"<<endl;
+		gano = true;
+	}
+	if(mapa[0][2].getFigura() == 'X' && mapa[1][1].getFigura() == 'X' && mapa[2][0].getFigura() == 'X'){
+		cout<<" JUGADOR 1 GANA"<<endl;
+		gano = true;
+	}
+}
+
 void Juego::jugada(){
+
+if (gano == false){
 	
 	inicializarMapa();
 	
@@ -175,54 +209,117 @@ void Juego::jugada(){
 	bool j2 = true;
 	bool jugada = true;
 	
-	
+	cout<<"JUEGO TA-TE-TI PARA 2 JUGADORES"<<endl;
+	cout<<"--------------------------------------------------------------------"<<endl;
+	cout<<"JUGADOR 1 = X"<<endl;
+	cout<<"JUGADOR 2 = O"<<endl;
+	cout<<"--------------------------------------------------------------------"<<endl;
 	
 	do{
-		cout<<" Jugador 1"<<endl;
+		cout<<" JUGADOR 1"<<endl;
+		mostrar();
 		lugarDisponible();
-		
 		while (j1 == true){
 			
 			if (kbhit()){
 				int tecla = getch();
 				switch (tecla){
-					
-				case 49: setMapa(0,0,'X');
-						 mostrar();
+						
+				case 49:if(mapa[0][0].getFigura() == '0'){
+						 setMapa(0,0,'X');
 						 j1 = false;
 						 break;
-				case 50: setMapa(0,1,'X');
-						 mostrar();
+						}
+						else{
+							j1 = true;
+							break;
+						}
+						
+				case 50:if(mapa[0][1].getFigura() == '0'){
+						 setMapa(0,1,'X');
 						 j1 = false;
 						 break;
-				case 51: setMapa(0,2,'X');
-						 mostrar();
+						}
+						else{
+						 j1 = true;
+						 break;
+						}
+						
+				case 51:if(mapa[0][2].getFigura() == '0'){
+						 setMapa(0,2,'X');
 						 j1 = false;
 						 break;
-				case 52: setMapa(1,0,'X');
-						 mostrar();
+						}
+						else{
+						 j1 = true;
+						 break;
+						}
+						
+				case 52:if(mapa[1][0].getFigura() == '0'){
+						 setMapa(1,0,'X');
 						 j1 = false;
 						 break;
-				case 53: setMapa(1,1,'X');
-						 mostrar();
+						}
+						else{
+						 j1 = true;
+						 break;
+						}
+						
+				case 53:if(mapa[1][1].getFigura() == '0'){
+						 setMapa(1,1,'X');
 						 j1 = false;
 						 break;
-				case 54: setMapa(1,2,'X');
-						 mostrar();
+						}
+						else{
+						 j1 = true;
+						 break;
+						}
+						
+				case 54:if(mapa[1][2].getFigura() == '0'){
+						 setMapa(1,2,'X');
 						 j1 = false;
 						 break;
-				case 55: setMapa(2,0,'X');
-						 mostrar();
+						}
+						else{
+						 j1 = true;
+						 break;
+						}
+						
+				case 55:if(mapa[2][0].getFigura() == '0'){
+						 setMapa(2,0,'X');
 						 j1 = false;
 						 break;
-				case 56: setMapa(2,1,'X');
-						 mostrar();
+						}
+						else{
+						 j1 = true;
+						 break;
+						}
+						
+				case 56:if(mapa[2][1].getFigura() == '0'){
+						 setMapa(2,1,'X');
 						 j1 = false;
 						 break;
-				case 57: setMapa(2,2,'X');
-						 mostrar();
+						}
+						else{
+						 j1 = true;
+						 break;
+						}
+						
+				case 57:if(mapa[2][2].getFigura() == '0'){
+						 setMapa(2,2,'X');
 						 j1 = false;
 						 break;
+						}
+						else{
+						 j1 = true;
+						 break;
+						}
+				case 27: j1 = false;
+						 j2 = false;
+						 jugada = false;
+						 break;
+						
+				default: cout<<"Elija otra coordenada"<<endl;
 							
 				}
 				
@@ -230,7 +327,8 @@ void Juego::jugada(){
 		}
 		
 		
-		cout<<"Jugador 2"<<endl;
+		cout<<"JUGADOR 2"<<endl;
+		mostrar();
 		lugarDisponible();
 		while (j2 == true){
 			
@@ -238,42 +336,99 @@ void Juego::jugada(){
 				int tecla = getch();
 				switch (tecla){
 					
-				case 49: setMapa(0,0,'O');
-						 mostrar();
+				case 49:if(mapa[0][0].getFigura() == '0'){
+						 setMapa(0,0,'O');
 						 j2 = false;
 						 break;
-				case 50: setMapa(0,1,'O');
-						 mostrar();
+						}
+						else{
+						 j2 = true;
+						 break;
+						}
+						
+				case 50:if(mapa[0][1].getFigura() == '0'){
+						 setMapa(0,1,'O');
 						 j2 = false;
 						 break;
-				case 51: setMapa(0,2,'O');
-						 mostrar();
+						}
+						else{
+						 j2 = true;
+						 break;
+						}
+						
+				case 51:if(mapa[0][2].getFigura() == '0'){
+						 setMapa(0,2,'O');
 						 j2 = false;
 						 break;
-				case 52: setMapa(1,0,'O');
-						 mostrar();
+						}
+						else{
+						 j2 = true;
+						 break;
+						}
+						
+				case 52:if(mapa[1][0].getFigura() == '0'){
+						 setMapa(1,0,'O');
 						 j2 = false;
 						 break;
-				case 53: setMapa(1,1,'O');
-						 mostrar();
+						}
+						else{
+						 j2 = true;
+						 break;
+						}
+						
+				case 53:if(mapa[1][1].getFigura() == '0'){
+						 setMapa(1,1,'O');
 						 j2 = false;
 						 break;
-				case 54: setMapa(1,2,'O');
-						 mostrar();
+						}
+						else{
+						 j2 = true;
+						 break;
+						}
+						
+				case 54:if(mapa[1][2].getFigura() == '0'){
+						 setMapa(1,2,'O');
 						 j2 = false;
 						 break;
-				case 55: setMapa(2,0,'O');
-						 mostrar();
+						}
+						else{
+						 j2 = true;
+						 break;
+						}
+						
+				case 55:if(mapa[2][0].getFigura() == '0'){
+						 setMapa(2,0,'O');
 						 j2 = false;
 						 break;
-				case 56: setMapa(2,1,'O');
-						 mostrar();
+						}
+						else{
+						 j2 = true;
+						 break;
+						}
+						
+				case 56:if(mapa[2][1].getFigura() == '0'){
+						 setMapa(2,1,'O');
 						 j2 = false;
 						 break;
-				case 57: setMapa(2,2,'O');
-						 mostrar();
+						}
+						else{
+						 j2 = true;
+						 break;
+						}
+						
+				case 57:if(mapa[2][2].getFigura() == '0'){
+						 setMapa(2,2,'O');
 						 j2 = false;
 						 break;
+						}
+						else{
+						 j2 = true;
+						 break;
+						}
+				case 27: j2 = false;
+						 jugada = false;
+						 break;
+				default: cout<<"Elija otra coordenada"<<endl;
 				}
 				
 			}
@@ -283,6 +438,11 @@ void Juego::jugada(){
 		j2 = true;
 		
 	} while(jugada == true);	
+}
+if (gano == true){
+	cout<<"Termino el juego, el ganador es: ";
+	ganador();
+}
 	
 }
 
