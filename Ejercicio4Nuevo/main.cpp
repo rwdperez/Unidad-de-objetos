@@ -5,7 +5,7 @@
 
 using namespace std;
 
-
+//Clase ficha, gestiona la informacion sobre la ficha que se usa.
 class Ficha {
 	
 	private:
@@ -14,19 +14,21 @@ class Ficha {
 	public:
 		
 		Ficha();
-		
+		//Da valor a figura.
 		Ficha(char);
-		
+		//Pinta el caracter elegido en la ficha.
 		void setFigura(char);
-		
+		//Retorna el caracter de la ficha.
 		char getFigura();
 		
 };
+//Clase donde se realiza toda la jugada y se controlan los datos del tablero.
 class Juego {
 	
 private:
-	
+	//Tablero donde se pintan las fichas.
 	Ficha mapa[3][3];
+	//Bool para saber si hay ganador o no.
 	bool gano = false;
 	
 	
@@ -35,19 +37,17 @@ private:
 public:
 	
 	Juego();
-	
+	//Ubica la ficha en una posicion del mapa.
 	void setMapa(int x, int y, char c);
-	
+	//Da un valor inicial a las coordenadas del mapa.
 	void inicializarMapa();
-	
+	//Retorna el mapa.
 	void mostrar();
-	
+	//Comprueba si ya se utilizo esa coordenada o no para mostrar el mensaje.
 	void lugarDisponible();
-	
+	//Aplica condiciones para saber si hay ganador o no.
 	void ganador();
-	
-	void verMapa();
-	
+	//Donde transcurre toda la jugada.
 	void jugada();
 	
 	
@@ -201,12 +201,15 @@ void Juego::ganador(){
 
 void Juego::jugada(){
 
+//Si no hay ganador se ejecuta el juego.
 if (gano == false){
-	
+	//Doy valor 0 a todas las coordenadas del mapa.
 	inicializarMapa();
-	
+	//Bandera de la jugada del jugador 1.
 	bool j1 = true;
+	//Bandera de la jugda del jugador 2.
 	bool j2 = true;
+	//Bandera del do while central donde transcurre todo el juego.
 	bool jugada = true;
 	
 	cout<<"JUEGO TA-TE-TI PARA 2 JUGADORES"<<endl;
@@ -217,8 +220,12 @@ if (gano == false){
 	
 	do{
 		cout<<" JUGADOR 1"<<endl;
+		//Muestro el mapa.
 		mostrar();
+		//Chequeo las coordenadas disponibles.
 		lugarDisponible();
+		
+		//Solo si la coordenada es igual a 0 deja presionar la tecla.
 		while (j1 == true){
 			
 			if (kbhit()){
@@ -326,10 +333,13 @@ if (gano == false){
 			}
 		}
 		
-		
+		//Comienza la jugada del jugador 2.
 		cout<<"JUGADOR 2"<<endl;
+		//Muestro el mapa.
 		mostrar();
+		//Consulto coordenadas disponibles.
 		lugarDisponible();
+		//Solo si la coordenada es igual a 0 deja presionar la tecla.
 		while (j2 == true){
 			
 			if (kbhit()){
@@ -439,6 +449,7 @@ if (gano == false){
 		
 	} while(jugada == true);	
 }
+//Si se detecta ganador dentro del void ganador,se deja de ejecutar la jugada.
 if (gano == true){
 	cout<<"Termino el juego, el ganador es: ";
 	ganador();
@@ -452,8 +463,9 @@ int main (int argc, char *argv[]) {
 	
 	
 	
-	Juego jugador1;
-	jugador1.jugada();
+	Juego jugadores;
+	
+	jugadores.jugada();
 
 	
 	
